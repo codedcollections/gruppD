@@ -78,14 +78,21 @@ const quizOneButton = document.getElementById('quiz-one')
 quizOneButton.addEventListener('click', () => renderQuiz(quizData))
 
 function renderQuiz(chosenArray) {
-    //console.log(chosenArray)
+
+    //kollar ifall vi är inne på quizData eller quizData2 array
     if(chosenArray === quizData){
-        /* console.log("found right array") */
+
         //Skapar ett div-element som senare ska läggas till i index.html
         const questionContainer = document.getElementById("options")
         const questions = document.createElement("h2")
         //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
-        questions.innerText = "Hur stor är månen?"
+        // 
+        // questions.innerText = "Hur stor är månen?"
+        let currentQuestion = chosenArray[0].question
+
+
+        questions.innerText = currentQuestion
+
         questionContainer.appendChild(questions)
         
         //Skapar en div som ska innehålla svars-knappar 
@@ -93,20 +100,20 @@ function renderQuiz(chosenArray) {
         
         //Skapar knappar till ovanstående div
         const answerOne = document.createElement("button")
-        answerOne.textContent = "Jättestor"
+        answerOne.textContent = chosenArray[0].options[0]
         //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
         buttonContainer.appendChild(answerOne)
         
         const answerTwo = document.createElement("button")
-        answerTwo.textContent = "GIGA STOR"
+        answerTwo.textContent = chosenArray[0].options[1]
         buttonContainer.appendChild(answerTwo)
         
         const answerThree = document.createElement("button")
-        answerThree.textContent = "Pytteliten"
+        answerThree.textContent = chosenArray[0].options[2]
         buttonContainer.appendChild(answerThree)
         
         const answerFour = document.createElement("button")
-        answerFour.textContent = "Minimal"
+        answerFour.textContent = chosenArray[0].options[3]
         buttonContainer.appendChild(answerFour)
         
         //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
