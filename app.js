@@ -75,14 +75,14 @@ skapar HTML-element som ska läggas till i DOM (Alltså nya HTML-element som ska
 
 
 const quizOneButton = document.getElementById('quiz-one')
-quizOneButton.addEventListener('click', renderQuiz)
+quizOneButton.addEventListener('click', () => renderQuiz(quizData))
 
 function renderQuiz(chosenArray) {
-    console.log(chosenArray)
+    //console.log(chosenArray)
     if(chosenArray === quizData){
-        console.log("found right array")
+        /* console.log("found right array") */
         //Skapar ett div-element som senare ska läggas till i index.html
-        const questionContainer = document.createElement("div") 
+        const questionContainer = document.getElementById("options")
         const questions = document.createElement("h2")
         //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
         questions.innerText = "Hur stor är månen?"
@@ -111,13 +111,13 @@ function renderQuiz(chosenArray) {
         
         //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
         questionContainer.appendChild(buttonContainer)
+    }
 }
-}
 
-renderQuiz(quizData)
+/* renderQuiz(quizData) */
 
 
-//Skapar ett div-element som senare ska läggas till i index.html
+/* //Pekar ut div-element med id = options i index.html. här ska all information läggas sen
 const questionContainer = document.getElementById("options") 
 const questions = document.createElement("h2")
 //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
@@ -146,7 +146,7 @@ answerFour.textContent = "Minimal"
 buttonContainer.appendChild(answerFour)
 
 //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
-questionContainer.appendChild(buttonContainer)
+questionContainer.appendChild(buttonContainer) */
     /*
     Ovanför har vi skapat strukturen:
     <div>
