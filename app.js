@@ -80,43 +80,73 @@ quizOneButton.addEventListener('click', renderQuiz)
 function renderQuiz(chosenArray) {
     console.log(chosenArray)
     if(chosenArray === quizData){
+        console.log("found right array")
+        //Skapar ett div-element som senare ska läggas till i index.html
+        const questionContainer = document.createElement("div") 
+        const questions = document.createElement("h2")
+        //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
+        questions.innerText = "Hur stor är månen?"
+        questionContainer.appendChild(questions)
         
-    console.log("found right array")
-    //Skapar ett div-element som senare ska läggas till i index.html
-    const questionContainer = document.createElement("div") 
-    const questions = document.createElement("h2")
-    //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
-    questions.innerText = "Hur stor är månen?"
-    questionContainer.appendChild(questions)
-    
-    //Skapar en div som ska innehålla svars-knappar 
-    const buttonContainer = document.createElement("div")
-    
-    //Skapar knappar till ovanstående div
-    const answerOne = document.createElement("button")
-    answerOne.textContent = "Jättestor"
-    //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
-    buttonContainer.appendChild(answerOne)
-    
-    const answerTwo = document.createElement("button")
-    answerTwo.textContent = "GIGA STOR"
-    buttonContainer.appendChild(answerTwo)
-    
-    const answerThree = document.createElement("button")
-    answerThree.textContent = "Pytteliten"
-    buttonContainer.appendChild(answerThree)
-    
-    const answerFour = document.createElement("button")
-    answerFour.textContent = "Minimal"
-    buttonContainer.appendChild(answerFour)
-    
-    //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
-    questionContainer.appendChild(buttonContainer)
+        //Skapar en div som ska innehålla svars-knappar 
+        const buttonContainer = document.createElement("div")
+        
+        //Skapar knappar till ovanstående div
+        const answerOne = document.createElement("button")
+        answerOne.textContent = "Jättestor"
+        //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
+        buttonContainer.appendChild(answerOne)
+        
+        const answerTwo = document.createElement("button")
+        answerTwo.textContent = "GIGA STOR"
+        buttonContainer.appendChild(answerTwo)
+        
+        const answerThree = document.createElement("button")
+        answerThree.textContent = "Pytteliten"
+        buttonContainer.appendChild(answerThree)
+        
+        const answerFour = document.createElement("button")
+        answerFour.textContent = "Minimal"
+        buttonContainer.appendChild(answerFour)
+        
+        //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
+        questionContainer.appendChild(buttonContainer)
 }
 }
 
 renderQuiz(quizData)
-    
+
+
+//Skapar ett div-element som senare ska läggas till i index.html
+const questionContainer = document.getElementById("options") 
+const questions = document.createElement("h2")
+//lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
+questions.innerText = "Hur stor är månen?"
+questionContainer.appendChild(questions)
+
+//Skapar en div som ska innehålla svars-knappar 
+const buttonContainer = document.createElement("div")
+
+//Skapar knappar till ovanstående div
+const answerOne = document.createElement("button")
+answerOne.textContent = "Jättestor"
+//lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
+buttonContainer.appendChild(answerOne)
+
+const answerTwo = document.createElement("button")
+answerTwo.textContent = "GIGA STOR"
+buttonContainer.appendChild(answerTwo)
+
+const answerThree = document.createElement("button")
+answerThree.textContent = "Pytteliten"
+buttonContainer.appendChild(answerThree)
+
+const answerFour = document.createElement("button")
+answerFour.textContent = "Minimal"
+buttonContainer.appendChild(answerFour)
+
+//lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
+questionContainer.appendChild(buttonContainer)
     /*
     Ovanför har vi skapat strukturen:
     <div>
