@@ -1,8 +1,4 @@
-/*
-2 arrays med information om frågor och svar till quiz
-rätt svar sparas som "answer"
-*/
-const quizData = [
+const quizDataOne = [
     {
         num: 1,
         question: "Vilket är världens största land?",
@@ -35,7 +31,7 @@ const quizData = [
     }
 ]
 
-const quizData2 = [
+const quizDataTwo = [
     {
         num: 1,
         question: "Vem spelar huvudrollen som Jack Dawson i filmen Titanic?",
@@ -68,190 +64,69 @@ const quizData2 = [
     }
 ]
 
-/*
-skapar HTML-element som ska läggas till i DOM (Alltså nya HTML-element som ska läggas till i index.html-filen)
+//Hämtar in quizContainer från HTML
+const quizContainer = document.getElementById('quiz-container')
 
-*/
+let currentQuestion = 0  //Skapar en variabel med värdet 0 (så att man börjar på första frågan)
+let score = 0            //Skapar en räknare, räknar antal rätta svar
 
 
+//Hämtar knappar för ämne 1 och 2 och lägger på eventlisteners
+//när användaren klickar skickas rätt quizdata in i renderQuiz
 const quizOneButton = document.getElementById('quiz-one')
-quizOneButton.addEventListener('click', renderQuiz)
+quizOneButton.addEventListener('click', () => {
+    currentQuestion = 0         //Vet inte om den här behövs här?
+    renderQuiz(quizDataOne)    
+})
 
+const quizTwoButton = document.getElementById('quiz-two')
+quizTwoButton.addEventListener('click', () => {
+    currentQuestion = 0
+    renderQuiz(quizDataTwo)
+})
+
+
+//Funktion renderQuiz - visar första frågan utifrån valt quiz (chosenArray)
 function renderQuiz(chosenArray) {
-    console.log(chosenArray)
-    if(chosenArray === quizData){
-        
-    console.log("found right array")
-    //Skapar ett div-element som senare ska läggas till i index.html
-    const questionContainer = document.createElement("div") 
-    const questions = document.createElement("h2")
-    //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
-    questions.innerText = "Hur stor är månen?"
-    questionContainer.appendChild(questions)
-    
-    //Skapar en div som ska innehålla svars-knappar 
-    const buttonContainer = document.createElement("div")
-    
-    //Skapar knappar till ovanstående div
-    const answerOne = document.createElement("button")
-    answerOne.textContent = "Jättestor"
-    //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
-    buttonContainer.appendChild(answerOne)
-    
-    const answerTwo = document.createElement("button")
-    answerTwo.textContent = "GIGA STOR"
-    buttonContainer.appendChild(answerTwo)
-    
-    const answerThree = document.createElement("button")
-    answerThree.textContent = "Pytteliten"
-    buttonContainer.appendChild(answerThree)
-    
-    const answerFour = document.createElement("button")
-    answerFour.textContent = "Minimal"
-    buttonContainer.appendChild(answerFour)
-    
-    //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
-    questionContainer.appendChild(buttonContainer)
-}
-}
+    quizContainer.innerHTML = ""    //Rensar tidigare innehåll (så att bara EN fråga visas)
 
-renderQuiz(quizData)
-    
-    /*
-    Ovanför har vi skapat strukturen:
-    <div>
-    <h2>Hur stor är månen?</h2>
-    <button>Jättestor</button>
-    <button>GIGA STOR</button>
-    <button>Pytteliten</button>
-    <button>Minimal</button>
+    let item = chosenArray[currentQuestion] //Hämtar item (objektet/frågan), med det index som currentQuestion har
 
-</div>
+    let questionContainer = document.createElement('div') //Skapar ett element, en div för frågorna
+    let question = document.createElement('h2')  //h2 för frågans text
+        question.innerText = item.question       //lägger in texten till frågan
+        questionContainer.appendChild(question)      //lägger h2 i questionContainer
+        quizContainer.appendChild(questionContainer) //och lägger questionContainer i quizContainer
 
-Och","Fel svar","Fortfarande fel","Inte helt rätt"]
-const optionsContainer = document.getElementById("options")
-/* const newButton = document.createElement("button")
-newButton.textContent = answerArray[0]
-optionsContainer.appendChild(newButton) */
+    //Skapar svarsknappar och gör en loop genom item.options (item.options = array med svarsalternativen)
+    item.options.forEach((option) => {
+        let button = document.createElement('button')  //Skapar en knapp för varje alternativ
+        button.textContent = option                  //Visar texten från option på knappen
+    //Lägger till eventListener på varje knapp som kollar om svaret är rätt 
+        button.addEventListener('click', () => {    
+            if(option === item.answer) {    //Jämför knappens text med text för rätt svar
+                alert("Rätt svar!")
+                score++    //Om rätt svar läggs 1 poäng till i räknaren 
+            } else {
+                alert("Fel svar!")
+            }
+            
+            currentQuestion++   //Räknar upp +1 så att nuvarande fråga går vidare till nästa fråga
+            if(currentQuestion < chosenArray.length) {  //Om det finns fler frågor i arrayen
+                renderQuiz(chosenArray)                 //Hämtas nästa fråga
+            } else {
+                alert("Quiz klart!")
+                console.log(score) //Jag har kollat så att man ser poängen i konsolen, behöver skrivas ut till användaren
+            }
+        })
+        quizContainer.appendChild(button) //Lägger alla knappar/svaralternativ i quizcontainer 
+                                          //för att knapparna ska visas i HTML
+    })
+    }   
 
-/* myArray.forEach(function(item) {
-	console.log(item)
-}) */
-
-
-/* använder foreach för att gå igenom array
- answerArray.forEach(function(item){
-    const newButton = document.createElement("button")
-    newButton.textContent = item
-    optionsContainer.appendChild(newButton)
-}) */
-
-/* answerArray.forEach(i) = 0; i < answerArray.length; i++) {
-
-} */
-
-/*
-TODO
-
-lägg till knapp
-hårdkoda rätt svar
-kolla att om du klickar på rätt knapp
-är svaret rätt?
-isåfall: jippi
- */
-
-/*
-Hämta frågor ur vår array
-Kolla att svar är rätt eller fel
-Visa resultat 
-
-### **1. Strukturera projektet**
-
-Ni ska bygga en quizapplikation som innehåller följande delar, där allt hanteras på **samma HTML-sida**:
-
-1. **Startsida:**
-    - Börja med en välkomnande startsida där användaren får en introduktion till quizen.
-    - Här kan ni lägga till information om ämnet, hur många frågor som ingår och en "Starta Quiz"-knapp.
-    - Det måste finnas minst två tillgängliga ämnen/kategorier.
-2. **Quizdel:**
-    - När användaren klickar på "Starta Quiz"-knappen ska frågorna visas **dynamiskt på samma sida**.
-    - Frågorna ska visas en i taget, med flervalsalternativ där användaren kan välja sitt svar.
-    - Nästa fråga ska visas när användaren har valt ett svar.
-    - Minst 5 frågor per ämne/kategori.
-3. **Resultatdel:**
-    - När alla frågor är besvarade ska resultatet visas på samma sida. Här kan ni visa:
-        - Hur många rätt användaren fick.
-        - Rätt svar på varje fråga (valfritt).
-
-> Notera: Alla dessa delar (introduktion, frågor och resultat) ska hanteras genom att uppdatera och ändra
- innehållet på samma HTML-sida med hjälp av JavaScript.
-> 
-
----
-
-### **2. Dynamiskt flöde med JavaScript**
-
-För att få quizen att fungera dynamiskt ska ni använda JavaScript för att:
-
-1. **Visa och byta innehåll:**
-    - Byt mellan introduktionen, frågorna och resultatdelen genom att uppdatera innehållet i en `<div>` eller
-     liknande element.
-2. **Hantera frågor:**
-    - Spara alla frågor och svar i en JavaScript-array.
-    - Visa en fråga i taget och låt användaren välja ett svar innan nästa fråga visas.
-3. **Räkna poäng:**
-    - Håll reda på användarens poäng genom att spara hur många rätt svar de har under quizens gång.
-4. **Visa resultat:**
-    - När alla frågor är besvarade ska resultatet visas dynamiskt utan att ladda om sidan.
-
----
-
-### **3. Designa med CSS**
-
-- **Enhetlig design:** Använd CSS för att skapa en snygg och tydlig design. Centrera quizens innehåll och använd
- färger och typsnitt som gör applikationen tilltalande.
-- **Responsiv design:** Gör quizen användarvänlig även på mindre skärmar, t.ex. mobiler.
-- **Interaktiva effekter:** Lägg till visuella effekter som gör det roligare att använda quizen, t.ex. 
-hover-effekter på knappar.
-
+/* Behöver göras
+- ändra alert och ge svar utan en popup ? 
+- när quiz är slut - visa slutresultat
+- knapp för att återgå till startsida? 
+- CSS
 */
-
-
-
-/*
-ÖVRIGA TEST DELAR FÖR ATT SE HUR JAVASCRIPT FUNGERAR
-
-Test på hur det går att hämta information från array:
-
-console.log("hej")
-
-console.log(quizData[0].num)
-
-console.log(quizData[0].options)
-quizData[0].options.forEach(item => console.log(item));
-console.log(quizData[0].question) */
-
-/*Få en fråga att visas med alternativ 
-pekar på div som ska innehålla frågor
-skapar element
-appendchild skapade element till hämtad div
-*/
-
-//const questionContainer = document.getElementById("questions")
-
-
-//Ashurs kod som förklarar hur appendChild fungerar 
-
-// const newDiv = document.createElement('div')
-
-// newDiv.className = "my-new-div"
-// newDiv.id = "my-single-div"
-// newDiv.textContent = "my div content"
-
-// const newP = document.createElement('p')
-// newP.textContent = "my inner ptag"
-
-// newDiv.appendChild(newP)
-
-// document.body.appendChild(newDiv)
-
