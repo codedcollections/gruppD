@@ -75,48 +75,103 @@ skapar HTML-element som ska läggas till i DOM (Alltså nya HTML-element som ska
 
 
 const quizOneButton = document.getElementById('quiz-one')
-quizOneButton.addEventListener('click', renderQuiz)
+quizOneButton.addEventListener('click', () => renderQuiz(quizData))
+
+function printHi(){
+    console.log("Hi")
+}
 
 function renderQuiz(chosenArray) {
-    console.log(chosenArray)
+
+    //kollar ifall vi är inne på quizData eller quizData2 array
     if(chosenArray === quizData){
+
+        //Skapar ett div-element som senare ska läggas till i index.html
+        const questionContainer = document.getElementById("options")
+        const questions = document.createElement("h2")
+        //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
+        // 
+        // questions.innerText = "Hur stor är månen?"
+        let currentQuestion = chosenArray[0].question
+
+
+        questions.innerText = currentQuestion
+
+        questionContainer.appendChild(questions)
         
-    console.log("found right array")
-    //Skapar ett div-element som senare ska läggas till i index.html
-    const questionContainer = document.createElement("div") 
-    const questions = document.createElement("h2")
-    //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
-    questions.innerText = "Hur stor är månen?"
-    questionContainer.appendChild(questions)
-    
-    //Skapar en div som ska innehålla svars-knappar 
-    const buttonContainer = document.createElement("div")
-    
-    //Skapar knappar till ovanstående div
-    const answerOne = document.createElement("button")
-    answerOne.textContent = "Jättestor"
-    //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
-    buttonContainer.appendChild(answerOne)
-    
-    const answerTwo = document.createElement("button")
-    answerTwo.textContent = "GIGA STOR"
-    buttonContainer.appendChild(answerTwo)
-    
-    const answerThree = document.createElement("button")
-    answerThree.textContent = "Pytteliten"
-    buttonContainer.appendChild(answerThree)
-    
-    const answerFour = document.createElement("button")
-    answerFour.textContent = "Minimal"
-    buttonContainer.appendChild(answerFour)
-    
-    //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
-    questionContainer.appendChild(buttonContainer)
-}
+        //Skapar en div som ska innehålla svars-knappar 
+        const buttonContainer = document.createElement("div")
+        
+        //Skapar knappar till ovanstående div
+        const answerOne = document.createElement("button")
+        answerOne.className = "option-button"
+        answerOne.textContent = chosenArray[0].options[0]
+        //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
+        buttonContainer.appendChild(answerOne)
+        
+        const answerTwo = document.createElement("button")
+        answerTwo.className = "option-button"
+        answerTwo.textContent = chosenArray[0].options[1]
+        buttonContainer.appendChild(answerTwo)
+        
+        const answerThree = document.createElement("button")
+        answerThree.className = "option-button"
+        answerThree.textContent = chosenArray[0].options[2]
+        buttonContainer.appendChild(answerThree)
+        
+        const answerFour = document.createElement("button")
+        answerFour.className = "option-button"
+        answerFour.textContent = chosenArray[0].options[3]
+        buttonContainer.appendChild(answerFour)
+        
+        //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
+        questionContainer.appendChild(buttonContainer)
+    }
+    //pekar ut första knappen som dyker upp i HTML-strukturen med klassen "option-button"
+    const getOneButton = document.querySelector(".option-button")
+    //loggar hela HTML elementet, i vårt fall <button class="option-button">Kanada</button>
+    console.log(getOneButton)
+    getOneButton.addEventListener('click',() => printHi())
+
 }
 
-renderQuiz(quizData)
-    
+/* const getOneButton = document.querySelector("option-button")
+console.log(getOneButton) */
+
+
+/* renderQuiz(quizData) */
+
+
+/* //Pekar ut div-element med id = options i index.html. här ska all information läggas sen
+const questionContainer = document.getElementById("options") 
+const questions = document.createElement("h2")
+//lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
+questions.innerText = "Hur stor är månen?"
+questionContainer.appendChild(questions)
+
+//Skapar en div som ska innehålla svars-knappar 
+const buttonContainer = document.createElement("div")
+
+//Skapar knappar till ovanstående div
+const answerOne = document.createElement("button")
+answerOne.textContent = "Jättestor"
+//lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
+buttonContainer.appendChild(answerOne)
+
+const answerTwo = document.createElement("button")
+answerTwo.textContent = "GIGA STOR"
+buttonContainer.appendChild(answerTwo)
+
+const answerThree = document.createElement("button")
+answerThree.textContent = "Pytteliten"
+buttonContainer.appendChild(answerThree)
+
+const answerFour = document.createElement("button")
+answerFour.textContent = "Minimal"
+buttonContainer.appendChild(answerFour)
+
+//lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
+questionContainer.appendChild(buttonContainer) */
     /*
     Ovanför har vi skapat strukturen:
     <div>
