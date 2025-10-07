@@ -91,7 +91,7 @@ function startQuiz(selectedQuiz) {
     currentQuiz = selectedQuiz;
     currentQuestion = 0;
     score = 0;
-    document.querySelectorAll('button[id^="start-quiz"]').forEach(btn => btn.classList.add('hidden'));
+    document.querySelectorAll('#start-quiz').forEach(btn => btn.classList.add('hidden'));
     quizSection.classList.remove('hidden');
     showQuestion();
 }
@@ -142,9 +142,7 @@ restartBtn.addEventListener('click', () => {
     startQuizOneBtn.classList.remove("hidden");
     startQuizTwoBtn.classList.remove("hidden");
 });
-
-
-
+    
     /*
     Ovanför har vi skapat strukturen:
     <div>
