@@ -68,55 +68,83 @@ const quizData2 = [
     }
 ]
 
-/*
-skapar HTML-element som ska läggas till i DOM (Alltså nya HTML-element som ska läggas till i index.html-filen)
+const introduction = document.getElementById('introduction');
+const startQuizOneBtn = document.getElementById('start-quiz-one');
+const startQuizTwoBtn = document.getElementById('start-quiz-two');
+const quizSection = document.getElementById('quiz');
+const resultSection = document.getElementById('result');
+const questionsEl = document.getElementById('questions');
+const optionsEl = document.getElementById('options');
+const scoreEl = document.getElementById('score');
+const restartBtn = document.getElementById('restart');
 
-*/
+let currentQuiz = [];
+let currentQuestion = 0;
+let score = 0;
 
 
-const quizOneButton = document.getElementById('quiz-one')
-quizOneButton.addEventListener('click', renderQuiz)
+//starta rätt quiz
+startQuizOneBtn.addEventListener('click', () => startQuiz(quizData));
+startQuizTwoBtn.addEventListener('click', () => startQuiz(quizData2));
 
-function renderQuiz(chosenArray) {
-    console.log(chosenArray)
-    if(chosenArray === quizData){
-        
-    console.log("found right array")
-    //Skapar ett div-element som senare ska läggas till i index.html
-    const questionContainer = document.createElement("div") 
-    const questions = document.createElement("h2")
-    //lägger till text "Hur stor är månen?" i h2-elementet som skapas ovan
-    questions.innerText = "Hur stor är månen?"
-    questionContainer.appendChild(questions)
-    
-    //Skapar en div som ska innehålla svars-knappar 
-    const buttonContainer = document.createElement("div")
-    
-    //Skapar knappar till ovanstående div
-    const answerOne = document.createElement("button")
-    answerOne.textContent = "Jättestor"
-    //lägger till knappar in i buttonContainer. upprepas nedan med nya knappar
-    buttonContainer.appendChild(answerOne)
-    
-    const answerTwo = document.createElement("button")
-    answerTwo.textContent = "GIGA STOR"
-    buttonContainer.appendChild(answerTwo)
-    
-    const answerThree = document.createElement("button")
-    answerThree.textContent = "Pytteliten"
-    buttonContainer.appendChild(answerThree)
-    
-    const answerFour = document.createElement("button")
-    answerFour.textContent = "Minimal"
-    buttonContainer.appendChild(answerFour)
-    
-    //lägger till div-en med knappar som skapats ovan till en div som finns i index.htmln
-    questionContainer.appendChild(buttonContainer)
-}
+function startQuiz(selectedQuiz) {
+    currentQuiz = selectedQuiz;
+    currentQuestion = 0;
+    score = 0;
+    document.querySelectorAll('button[id^="start-quiz"]').forEach(btn => btn.classList.add('hidden'));
+    quizSection.classList.remove('hidden');
+    showQuestion();
 }
 
-renderQuiz(quizData)
-    
+
+//visa frågorna
+function showQuestion() {
+    const q = currentQuiz[currentQuestion];
+    questionsEl.textContent = q.question;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.addEventListener('click', () => checkAnswer(option));
+        optionsEl.appendChild(btn);
+    });
+}
+
+
+//kolla svar
+function checkAnswer(selectedOption) {
+    const q = currentQuiz[currentQuestion];
+    if (selectedOption === q.answer) {
+        score++;
+    } 
+    currentQuestion++;
+    if (currentQuestion < currentQuiz.length) {
+        showQuestion();
+    } else {
+      showResult();
+    }
+}
+
+
+//visa resultat
+function showResult() {
+    quizSection.classList.add('hidden');
+    resultSection.classList.remove('hidden');
+    scoreEl.textContent = `Du fick ${score} av ${currentQuiz.length} rätt!`;
+}
+
+
+//starta om
+restartBtn.addEventListener('click', () => {
+    resultSection.classList.add("hidden");
+    introduction.classList.remove("hidden");
+    startQuizOneBtn.classList.remove("hidden");
+    startQuizTwoBtn.classList.remove("hidden");
+});
+
+
+
     /*
     Ovanför har vi skapat strukturen:
     <div>
@@ -254,4 +282,3 @@ appendchild skapade element till hämtad div
 // newDiv.appendChild(newP)
 
 // document.body.appendChild(newDiv)
-
