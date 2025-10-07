@@ -35,15 +35,3 @@ button:hover {
     background-color: #005fa3;
 }
 
-.correct {
-    background-color: #4caf50 !important;
-}
-
-.wrong {
-    background-color: #e53935 !important;
-}
-
-#progress {
-    margin-bottom: 10px;
-    font-weight: bold;
-}
