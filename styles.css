@@ -1,11 +1,56 @@
-#introduction{
-    background-color: rgb(230, 230, 230);
+#introduction {
+    background-color: rgb(255, 255, 255);
+    border: solid rgb(238, 233, 233);
+    border-radius: 1rem;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
 }
 
-#questions{
-    background-color: rgb(225, 248, 255);
+#quiz {
+    background-color: rgb(255, 255, 255);
+    border: solid rgb(238, 233, 233);
+    border-radius: 1rem;
+    max-width: 600px;  
+    margin: auto;
+    margin-top: 3rem;
+    box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
 }
 
-#resultat{
-    background-color: lightskyblue;
+#result {
+    background-color: rgb(255, 255, 255);
+    border: solid rgb(238, 233, 233);
+    border-radius: 1rem;
+    max-width: 600px;  
+    margin: auto;
+    margin-top: 3rem;
+    box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
+
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 4rem;
+    background-color: rgb(242, 239, 239);
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    margin: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #cc4400;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #8c3303;
+}
+
