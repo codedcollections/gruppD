@@ -73,6 +73,7 @@ const questionsEl = document.getElementById('questions');
 const optionsEl = document.getElementById('options');
 const scoreEl = document.getElementById('score');
 const restartBtn = document.getElementById('restart');
+const activateBtn = document.getElementById('activate-quiz')
 
 let currentQuiz = [];
 let currentQuestion = 0;
@@ -80,8 +81,16 @@ let score = 0;
 
 
 //starta rätt quiz
+activateBtn.addEventListener('click', () => showQuizOptions())
 startQuizOneBtn.addEventListener('click', () => startQuiz(quizData));
 startQuizTwoBtn.addEventListener('click', () => startQuiz(quizData2));
+
+function showQuizOptions(){
+        startQuizOneBtn.classList.remove('hidden')
+        startQuizTwoBtn.classList.remove('hidden')
+        activateBtn.classList.add('hidden')
+};
+
 
 function startQuiz(selectedQuiz) {
     currentQuiz = selectedQuiz;
@@ -89,6 +98,7 @@ function startQuiz(selectedQuiz) {
     score = 0;
     document.querySelectorAll('#start-quiz').forEach(btn => btn.classList.add('hidden'));
     quizSection.classList.remove('hidden');
+    introduction.classList.add('hidden')
     showQuestion();
 }
 
