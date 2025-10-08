@@ -96,7 +96,8 @@ function startQuiz(selectedQuiz) {
     currentQuiz = selectedQuiz;
     currentQuestion = 0;
     score = 0;
-    document.querySelectorAll('#start-quiz').forEach(btn => btn.classList.add('hidden'));
+    const allBtns = document.querySelectorAll('.start-quiz')
+    allBtns.forEach(btn => btn.classList.add('hidden'));
     quizSection.classList.remove('hidden');
     introduction.classList.add('hidden')
     showQuestion();
