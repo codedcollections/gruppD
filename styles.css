@@ -54,3 +54,23 @@ button:hover {
     background-color: #8c3303;
 }
 
+@media only screen and (max-width: 600px) {
+    #introduction {
+        margin: 1.7rem;
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+
+    #quiz {
+        margin: 1.7rem;
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+
+    #result {
+        margin: 1.7rem;
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+}
+
